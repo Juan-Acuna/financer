@@ -6,7 +6,7 @@
 >/api/usuarios/login
 
 Body:
-```json
+```
 {
     "email":string,
     "pwd":string
@@ -14,13 +14,13 @@ Body:
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "token":string
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -29,7 +29,7 @@ Response:
 > /api/usuarios/new  
 
 Body:
-```json
+```
 {
     "email":string,
     "pwd":string,
@@ -40,7 +40,7 @@ Response:
 + HTTP 200:  
 
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -53,7 +53,7 @@ Parameters:
 id_usuario:long
 ```
 Body:
-```json
+```
 {
     "email":string,
     "pwd":string,
@@ -65,7 +65,7 @@ Response:
 + HTTP 200:  
 
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -79,7 +79,7 @@ id_usuario:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long,
     "email":string,
@@ -88,7 +88,7 @@ Response:
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -102,13 +102,13 @@ id_usuario:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -118,7 +118,7 @@ Response:
 #### Authorization: Bearer Token
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "usuarios":[
         {
@@ -131,7 +131,7 @@ Response:
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -147,7 +147,7 @@ id_usuario:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "cuentas":[
         {
@@ -161,7 +161,7 @@ Response:
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -174,7 +174,7 @@ Parameters:
 id_usuario:long
 ```
 Body:
-```json
+```
 {
     "codigo":string?,
     "nombre":string,
@@ -184,13 +184,13 @@ Body:
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -204,7 +204,7 @@ id_usuario:long
 id_cuenta:long
 ```
 Body:
-```json
+```
 {
     "codigo":string,
     "nombre":string,
@@ -215,7 +215,7 @@ Response:
 + HTTP 200:  
 
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -230,13 +230,13 @@ id_cuenta:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -252,7 +252,7 @@ id_usuario:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "movimientos":[
         {
@@ -267,7 +267,7 @@ Response:
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -280,7 +280,7 @@ Parameters:
 id_usuario:long
 ```
 Body:
-```json
+```
 {
     "cuenta":long,
     "destino":long?,
@@ -292,13 +292,13 @@ Body:
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -312,7 +312,7 @@ id_usuario:long
 id_movimiento:long
 ```
 Body:
-```json
+```
 {
     "comentario":string,
     "fecha":datetime,
@@ -323,7 +323,7 @@ Response:
 + HTTP 200:  
 
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
@@ -338,13 +338,13 @@ id_movimiento:long
 ```
 Response:  
 + HTTP 200:  
-```json
+```
 {
     "id":long
 }
 ```
 + HTTP 400:  
-```json
+```
 {
     "error":string
 }
