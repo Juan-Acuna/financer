@@ -1,0 +1,8 @@
+node_modules/
+
+.env
+docker.env
+
+out/
+build/
+dist/

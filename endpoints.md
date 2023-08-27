@@ -9,7 +9,7 @@ Parameters:
 ```
 id_usuario:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -29,7 +29,7 @@ Response:
 ### <span style="color:green">GET</span> Listar Usuarios  
 > /api/usuarios/
 #### Authorization: Bearer Token
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 [
@@ -49,7 +49,7 @@ Response:
 }
 ```
 ### <span style="color:#2278ff">POST</span> Nuevo Usuario  
-> /api/usuarios/new  
+> /api/usuarios/  
 
 Body:
 ```
@@ -59,9 +59,13 @@ Body:
     "nombre":string
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
-
+```
+{
+    "id":long
+}
+```
 + HTTP 400:  
 ```
 {
@@ -84,7 +88,7 @@ Body:
     "activo":bool
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 
 + HTTP 400:  
@@ -100,7 +104,7 @@ Parameters:
 ```
 id_usuario:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -123,7 +127,7 @@ Body:
     "pwd":string
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -155,7 +159,7 @@ Body:
     "code":int
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -172,18 +176,18 @@ Response:
 ## Cuentas  
 
 ### <span style="color:green">GET</span> Cuenta  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
+> /api/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
 #### Authorization: Bearer Token  
 Parameters:
 ```
-id_usuario:long
 id_cuenta:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
     "id":long,
+    "usuario":long,
     "codigo":string,
     "nombre":string,
     "tipo":int,
@@ -197,18 +201,15 @@ Response:
 }
 ```
 ### <span style="color:green">GET</span> Listar Cuentas  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/cuentas
+> /api/cuentas
 #### Authorization: Bearer Token
-Parameters:
-```
-id_usuario:long
-```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 [
     {
         "id":long,
+        "usuario":long,
         "codigo":string,
         "nombre":string,
         "tipo":int,
@@ -223,22 +224,19 @@ Response:
 }
 ```
 ### <span style="color:#2278ff">POST</span> Nueva Cuenta  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/cuentas/new
+> /api/cuentas/
 #### Authorization: Bearer Token
-Parameters:
-```
-id_usuario:long
-```
 Body:
 ```
 {
     "codigo":string?,
+    "usuario":long,
     "nombre":string,
     "tipo":int,
     "saldo":double?
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -252,11 +250,10 @@ Response:
 }
 ```
 ### <span style="color:#ff78ff">PATCH</span> Actualizar Cuenta  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
+> /api/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
 #### Authorization: Bearer Token  
 Parameters:
 ```
-id_usuario:long
 id_cuenta:long
 ```
 Body:
@@ -267,7 +264,7 @@ Body:
     "tipo":int
 }
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 
 + HTTP 400:  
@@ -277,14 +274,13 @@ Response:
 }
 ```
 ### <span style="color:red">DELETE</span> Eliminar Cuenta  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
+> /api/cuentas/<span style="color:#ffff00">_id_cuenta_</span>
 #### Authorization: Bearer Token  
 Parameters:
 ```
-id_usuario:long
 id_cuenta:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
@@ -297,23 +293,50 @@ Response:
     "error":string
 }
 ```
+### <span style="color:green">GET</span> Listar Cuentas del Usuario  
+> /api/cuentas/usuario/<span style="color:#ffff00">_id_usuario_</span>
+#### Authorization: Bearer Token
+Parameters:
+```
+id_usuario:long
+```
+Responses:  
++ HTTP 200:  
+```
+[
+    {
+        "id":long,
+        "usuario":long,
+        "codigo":string,
+        "nombre":string,
+        "tipo":int,
+        "saldo":double
+    }
+]
+```
++ HTTP 400:  
+```
+{
+    "error":string
+}
+```
 
 ## Movimientos  
 
 ### <span style="color:green">GET</span> Movimiento  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/movimientos/<span style="color:#ffff00">_id_movimiento_</span>
+> /api/movimientos/<span style="color:#ffff00">_id_movimiento_</span>
 #### Authorization: Bearer Token  
 Parameters:
 ```
-id_usuario:long
 id_movimiento:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 {
     "id":long,
     "cuenta":long,
+    "usuario":long,
     "destino":long?,
     "tipo":int,
     "comentario":string?,
@@ -328,13 +351,110 @@ Response:
 }
 ```
 ### <span style="color:green">GET</span> Listar Movimientos  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/movimientos
+> /api/movimientos
+#### Authorization: Bearer Token
+Responses:  
++ HTTP 200:  
+```
+[
+    {
+        "id":long,
+        "cuenta":long,
+        "usuario":long,
+        "destino":long?,
+        "tipo":int,
+        "comentario":string?,
+        "fecha":datetime,
+        "monto":double
+    }
+]
+```
++ HTTP 400:  
+```
+{
+    "error":string
+}
+```
+### <span style="color:#2278ff">POST</span> Nuevo Movimiento  
+> /api/movimientos/
+#### Authorization: Bearer Token
+Body:
+```
+{
+    "cuenta":long,
+    "usuario":long,
+    "destino":long?,
+    "tipo":int,
+    "comentario":string?,
+    "fecha":datetime?,
+    "monto":double
+}
+```
+Responses:  
++ HTTP 200:  
+```
+{
+    "id":long
+}
+```
++ HTTP 400:  
+```
+{
+    "error":string
+}
+```
+### <span style="color:#ff78ff">PATCH</span> Actualizar Movimiento  
+> /api/movimientos/<span style="color:#ffff00">_id_movimiento_</span>
+#### Authorization: Bearer Token  
+Parameters:
+```
+id_movimiento:long
+```
+Body:
+```
+{
+    "comentario":string,
+    "fecha":datetime,
+    "monto":double
+}
+```
+Responses:  
++ HTTP 200:  
+
++ HTTP 400:  
+```
+{
+    "error":string
+}
+```
+### <span style="color:red">DELETE</span> Eliminar Movimiento  
+> /api/movimientos/<span style="color:#ffff00">_id_movimiento_</span>
+#### Authorization: Bearer Token  
+Parameters:
+```
+id_movimiento:long
+```
+Responses:  
++ HTTP 200:  
+```
+{
+    "id":long
+}
+```
++ HTTP 400:  
+```
+{
+    "error":string
+}
+```
+### <span style="color:green">GET</span> Listar Movimientos del Usuario  
+> /api/movimientos/usuario/<span style="color:#ffff00">_id_usuario_</span>
 #### Authorization: Bearer Token
 Parameters:
 ```
 id_usuario:long
 ```
-Response:  
+Responses:  
 + HTTP 200:  
 ```
 [
@@ -355,60 +475,3 @@ Response:
     "error":string
 }
 ```
-### <span style="color:#2278ff">POST</span> Nuevo Movimiento  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/movimientos/new
-#### Authorization: Bearer Token
-Parameters:
-```
-id_usuario:long
-```
-Body:
-```
-{
-    "cuenta":long,
-    "destino":long?,
-    "tipo":int,
-    "comentario":string?,
-    "fecha":datetime?,
-    "monto":double
-}
-```
-Response:  
-+ HTTP 200:  
-```
-{
-    "id":long
-}
-```
-+ HTTP 400:  
-```
-{
-    "error":string
-}
-```
-### <span style="color:#ff78ff">PATCH</span> Actualizar Movimiento  
-> /api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/movimientos/<span style="color:#ffff00">_id_movimiento_</span>
-#### Authorization: Bearer Token  
-Parameters:
-```
-id_usuario:long
-id_movimiento:long
-```
-Body:
-```
-{
-    "comentario":string,
-    "fecha":datetime,
-    "monto":double
-}
-```
-Response:  
-+ HTTP 200:  
-
-+ HTTP 400:  
-```
-{
-    "error":string
-}
-```
-### <span style="color:red">DELETE</span> Eliminar Movimiento  
