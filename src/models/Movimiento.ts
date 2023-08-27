@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { Repositorio } from '../core/Repo';
+import { daJack } from '../core/Repo';
 
-const Movimiento = Repositorio.define('Movimientos', {
+const Movimiento = daJack.define('Movimientos', {
     id : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },
     usuario : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },
     cuenta : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },

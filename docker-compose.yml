@@ -1,5 +1,16 @@
 version: '3.9'
 services:
+  db-mariadb:
+    restart: always
+    image: mariadb:11.0.2
+    ports:
+      - '3306:3306'
+    environment:
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - db-mariadb01:/va/lib/mysql
   financer:
     restart: always
     build: .
@@ -14,16 +25,6 @@ services:
       - DB_SCHEMA=${DB_SCHEMA}
       - DB_USR=${DB_USR}
       - DB_PWD=${DB_PWD}
-  db-mariadb:
-    restart: always
-    image: mariadb:11.0.2
-    ports:
-      - '3306:3306'
-    environment:
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-    volumes:
-      - db-mariadb01:/va/lib/mysql
+  
 volumes:
   db-mariadb01:

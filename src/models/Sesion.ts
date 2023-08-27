@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { Repositorio } from '../core/Repo';
+import { daJack } from '../core/Repo';
 
-const Sesion = Repositorio.define('Sesiones', {
+const Sesion = daJack.define('Sesiones', {
     id : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },
     usuario : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },
     timestamp : { type: DataTypes.DATE },

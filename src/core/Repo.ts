@@ -12,4 +12,4 @@ class Repo{
     }
 }
 
-export const Repositorio = new Repo(ConectorFactory.createMariabd());
+export const daJack = new Repo(ConectorFactory.createMariabd());

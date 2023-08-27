@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import Usuario from '../models/Usuario';
 import Cuenta from '../models/Cuenta';
 
 export const getCuenta = async (req : Request, res : Response)=>{
@@ -22,7 +21,9 @@ export const getCuenta = async (req : Request, res : Response)=>{
     }
 }
 export const getCuentas = async (req : Request, res : Response)=>{
-
+    const { id } = req.params;
+    const cuentas = await Cuenta.findAll();
+    res.json(cuentas);
 }
 export const postNew = async (req : Request, res : Response)=>{
 

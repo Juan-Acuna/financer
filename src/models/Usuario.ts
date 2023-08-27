@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import { Repositorio } from "../core/Repo";
+import { daJack } from "../core/Repo";
 
-const Usuario = Repositorio.define('Usuarios', {
+const Usuario = daJack.define('Usuarios', {
     id : { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true },
     email : { type: DataTypes.STRING },
     nombre : { type: DataTypes.STRING },
