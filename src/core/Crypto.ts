@@ -1,7 +1,7 @@
-import { createHash } from 'crypto';
+import { createHmac } from 'crypto';
 
 const encriptar = (payload: string) => {
-    return createHash(process.env.CRYPT_ALG || 'sha256').update(payload).digest();
+    return createHmac(process.env.CRYPT_ALG || 'sha256', process.env.CRYPT_SEC || 'Secreto').update(payload).digest('base64');
 }
 const generarCodigo = () => {
     return Math.floor(100000 + Math.random() * 900000);
