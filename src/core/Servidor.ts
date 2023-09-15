@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import usuariosRoutes from '../routes/UsuarioRouter';
 import cuentasRoutes from '../routes/CuentaRouter';
 import movRoutes from '../routes/MovRouter';
+import Token from "./Token";
 
 export default class Servidor{
     private port : string;
@@ -20,6 +21,8 @@ export default class Servidor{
     }
     private middleware(){
         this.app.use(express.json());
+        this.app.use(Token.activarJWT(`${this.endpoints.usuarios}/login`, `${this.endpoints.usuarios}/validar`, `${this.endpoints.usuarios}/new`));
+        this.app.use(Token.invalido());
     }
     private configRoutes(){
         this.app.use(this.endpoints.usuarios, usuariosRoutes);

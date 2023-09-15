@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+
+if(!process.env.DOCKER)
+    dotenv.config();
+
 import Servidor from "./core/Servidor";
 
 

@@ -9,21 +9,19 @@ export const getCuenta = async (req : Request, res : Response)=>{
             res.json(cuenta);
             return;
         }
-        res.status(400).json({
-            error: 'La cuenta no existe.'
-        });
-        return;
+        res.status(400).json({ error: 'La cuenta no existe.' });
     }catch(error){
-        console.log(error);
-        res.status(500).json({
-            error: 'Hubo un problema.'
-        });
+        res.status(500).json({ error: 'Hubo un problema.' });
     }
 }
 export const getCuentas = async (req : Request, res : Response)=>{
     const { id } = req.params;
-    const cuentas = await Cuenta.findAll();
-    res.json(cuentas);
+    try {
+        const cuentas = await Cuenta.findAll();
+        res.json(cuentas);
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un problema.' });
+    }
 }
 export const postNew = async (req : Request, res : Response)=>{
     const { body } = req;
@@ -35,18 +33,14 @@ export const postNew = async (req : Request, res : Response)=>{
             }
         });
         if(existe){
-            res.status(400).json({
-                error: 'El usuario ya tiene una cuenta con ese nombre.'
-            });
+            res.status(400).json({ error: 'El usuario ya tiene una cuenta con ese nombre.' });
             return;
         }
         const cuenta = await Cuenta.build(body);
         cuenta.save();
-        res.json({id:cuenta});
+        res.json({ id:cuenta.id });
     } catch (error) {
-        res.status(500).json({
-            error: 'Hubo un problema.'
-        });
+        res.status(500).json({ error: 'Hubo un problema.' });
     }
 }
 export const patchActualizar = async (req : Request, res : Response)=>{
@@ -55,21 +49,28 @@ export const patchActualizar = async (req : Request, res : Response)=>{
     try{
         const cuenta = await Cuenta.findByPk(id);
         if(cuenta){
-            
+            cuenta.update(body);
+            await cuenta.save();
             res.json(cuenta);
             return;
         }
-        res.status(400).json({
-            error: 'La cuenta no existe.'
-        });
-        return;
+        res.status(400).json({ error: 'La cuenta no existe.' });
     }catch(error){
-        console.log(error);
-        res.status(500).json({
-            error: 'Hubo un problema.'
-        });
+        res.status(500).json({ error: 'Hubo un problema.' });
     }
 }
 export const deleteCuenta = async (req : Request, res : Response)=>{
-
+    const { id } = req.params;
+    try {
+        const cuenta = await Cuenta.findByPk(id);
+        if(cuenta){
+            cuenta.update({ activa: 0 });
+            await cuenta.save();
+            res.json({ id: id });
+            return;
+        }
+        res.status(400).json({ error: 'La cuenta no existe.' });
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un problema.' });
+    }
 }

@@ -16,8 +16,8 @@ Responses:
     "id":long,
     "email":string,
     "nombre":string,
-    "activo":bool,
-    "validado":bool
+    "activo":int,
+    "validado":int
 }
 ```
 + HTTP 400:  
@@ -37,8 +37,8 @@ Responses:
         "id":long,
         "email":string,
         "nombre":string,
-        "activo":bool,
-        "validado":bool
+        "activo":int,
+        "validado":int
     }
 ]
 ```
@@ -49,7 +49,7 @@ Responses:
 }
 ```
 ### <span style="color:#2278ff">POST</span> Nuevo Usuario  
-> /api/usuarios/  
+> /api/usuarios/new  
 
 Body:
 ```
@@ -85,12 +85,21 @@ Body:
     "email":string,
     "pwd":string,
     "nombre":string,
-    "activo":bool
+    "activo":int,
+    "validado":int
 }
 ```
 Responses:  
 + HTTP 200:  
-
+```
+{
+    "email":string,
+    "pwd":string,
+    "nombre":string,
+    "activo":int,
+    "validado":int
+}
+```
 + HTTP 400:  
 ```
 {
@@ -131,7 +140,14 @@ Responses:
 + HTTP 200:  
 ```
 {
-    "token":string
+    "token":string,
+    "usuario":{
+        "email":string,
+        "pwd":string,
+        "nombre":string,
+        "activo":int,
+        "validado":int
+    }
 }
 ```
 + HTTP 401:  
@@ -147,7 +163,7 @@ Responses:
 }
 ```
 ### <span style="color:#2278ff">POST</span> Validar Correo  
->/api/usuarios/<span style="color:#ffff00">_id_usuario_</span>/validar
+>/api/usuarios/validar/<span style="color:#ffff00">_id_usuario_</span>
 #### Authorization: Bearer Token  
 Parameters:
 ```
@@ -161,11 +177,6 @@ Body:
 ```
 Responses:  
 + HTTP 200:  
-```
-{
-    "token":string
-}
-```
 + HTTP 400:  
 ```
 {

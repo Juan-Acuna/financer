@@ -7,6 +7,7 @@ const Cuenta = daJack.define('Cuentas', {
     codigo : { type: DataTypes.STRING },
     nombre : { type: DataTypes.STRING },
     tipo : { type: DataTypes.TINYINT.UNSIGNED },
-    saldo : { type: DataTypes.DOUBLE }
+    saldo : { type: DataTypes.DOUBLE },
+    activa : { type: DataTypes.TINYINT.UNSIGNED }
 });
 export default Cuenta;

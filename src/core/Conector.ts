@@ -1,24 +1,15 @@
-import { ModelCtor, Model, Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import { ModelCtor, Model, Sequelize, QueryTypes } from 'sequelize';
 
-let loaded = false;
-
-export const loadEnv = ()=>{
-    if(!loaded){
-        if(!process.env.DOCKER)
-            dotenv.config();
-    }
-}
 
 export abstract class Conector{
     constructor(){}
     abstract define(nombre : string, modelo : any, opciones : any | undefined): ModelCtor<Model>;
-    async connect(): Promise<void> {}
+    async connect(): Promise<void> {};
+    abstract executeFunction(f:string, v:Array<string | number | boolean>):Promise<unknown>;
 }
 
 export abstract class ConectorFactory{
     static createMariabd() : Conector{
-        loadEnv();
         return new ConectorMariadb();
     }
 }
@@ -38,5 +29,16 @@ class ConectorMariadb extends Conector{
     }
     async connect(): Promise<void> {
         this.db.authenticate();
+    }
+    async executeFunction(f:string, v:Array<string | number | boolean>): Promise<unknown> {
+        let vs = '';
+        v.forEach(e => {
+            vs += `${(typeof e )=='string'?"'"+e+"'":e},`;
+        });
+        console.log(vs);
+        vs = vs.substring(0,vs.length-1);
+        const q = `SELECT ${f}(${vs})`;
+        const r = ((await this.db.query(q, { type: QueryTypes.SELECT }))[0]);
+        return Object.values(r)[0];
     }
 }

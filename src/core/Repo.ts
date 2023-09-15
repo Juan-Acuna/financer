@@ -10,6 +10,9 @@ class Repo{
     define(nombre : string, modelo : any, opciones : any = {}): ModelCtor<any> {
         return this.conector.define(nombre, modelo, opciones);
     }
+    storedFunction(functionName: string, ...values: Array<any>): Promise<unknown>{
+        return this.conector.executeFunction(functionName, values);
+    }
 }
 
 export const daJack = new Repo(ConectorFactory.createMariabd());

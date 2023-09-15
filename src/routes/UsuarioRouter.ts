@@ -5,10 +5,10 @@ const router = Router();
 
 router.get('/:id', getUsuario);
 router.get('/', getUsuarios);
-router.post('/', postNew);
+router.post('/new', postNew);
 router.patch('/:id', patchActualizar);
 router.delete('/:id', deleteUsuario);
 router.post('/login', postIniciarSesion);
-router.post('/:id/validar', postValidar);
+router.post('/validar', postValidar);
 
 export default router;
