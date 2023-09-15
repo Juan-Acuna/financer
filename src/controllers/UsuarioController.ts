@@ -112,7 +112,7 @@ export const patchActualizar = async (req : Request, res : Response)=>{
             }
             if(pwd){
                 if(Crypto.validarFormatoClave(pwd)){
-                    upd.clave=pwd;
+                    upd.clave=Crypto.encriptar(pwd);
                 }else{
                     res.status(400).json({ error:'La contraseña no cumple con el formato requerido ( min: 6,max: 30, letras, numeros y los simbolos ". _ ! # $ % & * ( ) = + ," )' });
                     return;
@@ -146,7 +146,7 @@ export const deleteUsuario = async (req : Request, res : Response)=>{
 export const postIniciarSesion = async (req : Request, res : Response)=>{
     const { body: { email, pwd } } = req;
     try {
-        const r = await daJack.storedFunction('FN_LOGIN', email, pwd) as number;
+        const r = await daJack.storedFunction('FN_LOGIN', email, Crypto.encriptar(pwd)) as number;
         if(r > 0){
             const usuario = await Usuario.findByPk(r);
             const token = Token.generarToken({

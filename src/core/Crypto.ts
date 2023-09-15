@@ -1,6 +1,7 @@
+import { createHash } from 'crypto';
 
 const encriptar = (payload: string) => {
-    return payload;//pendiente
+    return createHash(process.env.CRYPT_ALG || 'sha256').update(payload).digest();
 }
 const generarCodigo = () => {
     return Math.floor(100000 + Math.random() * 900000);
