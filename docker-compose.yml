@@ -6,16 +6,20 @@ services:
     ports:
       - '3306:3306'
     environment:
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${DB_USR}
+      - MARIADB_PASSWORD=${DB_PWD}
+      - MARIADB_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MARIADB_DATABASE=${DB_SCHEMA}
     volumes:
-      - db-mariadb01:/va/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./vol/db:/va/lib/mysql
   financer:
     restart: always
     build: .
+    depends_on:
+      - db-mariadb
     ports:
-      - '${PORT}:${PORT}'
+      - '${PORT}:8000'
     links:
       - db-mariadb
     environment:
@@ -25,6 +29,3 @@ services:
       - DB_SCHEMA=${DB_SCHEMA}
       - DB_USR=${DB_USR}
       - DB_PWD=${DB_PWD}
-  
-volumes:
-  db-mariadb01:

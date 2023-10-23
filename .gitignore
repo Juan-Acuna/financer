@@ -2,6 +2,8 @@ node_modules/
 
 .env
 docker.env
+vol/
+volumes/
 
 out/
 build/
