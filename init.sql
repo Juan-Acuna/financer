@@ -115,14 +115,14 @@ SELECT * FROM `financer-db`.Cuentas;
 SELECT * FROM `financer-db`.Movimientos;
 
 
-INSERT INTO `financer-db`.Usuarios VALUES(null,'jignacio.acunav@gmail.com','Juan Algo Valdes','?',1,1,1,NOW(),NOW());
-INSERT INTO `financer-db`.Usuarios VALUES(null,'unusuario256@gmail.com','Juancho','?',2,1,1,NOW(),NOW());
+INSERT INTO `financer-db`.Usuarios VALUES(null,'jorge@ejemplo.com','Jorge Algo Valdes','?',1,1,1,NOW(),NOW());
+INSERT INTO `financer-db`.Usuarios VALUES(null,'arturo@ejemplo.com','Arturo','?',2,1,1,NOW(),NOW());
 
 INSERT INTO `financer-db`.Cuentas VALUES(null,1,'XXX-XXX-014','Cuenta Principal',1,10000,1,NOW(),NOW());
 INSERT INTO `financer-db`.Cuentas VALUES(null,1,'XXX-XXX-645','Cuenta Secundaria',1,150000,1,NOW(),NOW());
 INSERT INTO `financer-db`.Cuentas VALUES(null,1,'XXX-XXX-055','Cuenta de respaldo',3,2500,1,NOW(),NOW());
 INSERT INTO `financer-db`.Cuentas VALUES(null,2,'XXX-XXX-666','Cuenta rut',2,12500,1,NOW(),NOW());
-INSERT INTO `financer-db`.Cuentas VALUES(null,2,'XXX-Y','platita',5,5000,1,NOW(),NOW());
+INSERT INTO `financer-db`.Cuentas VALUES(null,2,'XXX-Y','plata',5,5000,1,NOW(),NOW());
 
 delete from `financer-db`.Validaciones where usuario = 22;
 delete from `financer-db`.Usuarios where id = 22;
